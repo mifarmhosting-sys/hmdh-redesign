@@ -113,6 +113,8 @@
         @error('image')<span style="color: var(--danger); font-size: 0.8rem;">{{ $message }}</span>@enderror
       </div>
 
+      @include('admin.testimonials._extra')
+
       <div class="form-group">
         <label for="sort_order">Sort Order</label>
         <input type="number" id="sort_order" name="sort_order" class="form-control" value="0" required>

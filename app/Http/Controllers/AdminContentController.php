@@ -29,9 +29,19 @@ class AdminContentController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096',
             'description' => 'nullable|string|max:1000',
             'sort_order' => 'required|integer',
+            'category' => 'nullable|string|max:255',
+            'zone' => 'nullable|string|max:255',
+            'tag' => 'nullable|string|max:255',
+            'duration' => 'nullable|string|max:255',
+            'best_time' => 'nullable|string|max:255',
+            'member_perk' => 'nullable|string|max:255',
+            'home_order' => 'nullable|integer',
         ]);
 
         $data = $request->except(['image']);
+        $data['is_featured'] = $request->boolean('is_featured');
+        $data['show_on_home'] = $request->boolean('show_on_home');
+        $data['home_order'] = (int) $request->input('home_order', 0);
         if ($request->hasFile('image')) {
             $data['image_path'] = $request->file('image')->store('images', 'public');
         }
@@ -56,9 +66,19 @@ class AdminContentController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
             'description' => 'nullable|string|max:1000',
             'sort_order' => 'required|integer',
+            'category' => 'nullable|string|max:255',
+            'zone' => 'nullable|string|max:255',
+            'tag' => 'nullable|string|max:255',
+            'duration' => 'nullable|string|max:255',
+            'best_time' => 'nullable|string|max:255',
+            'member_perk' => 'nullable|string|max:255',
+            'home_order' => 'nullable|integer',
         ]);
 
         $data = $request->except(['image']);
+        $data['is_featured'] = $request->boolean('is_featured');
+        $data['show_on_home'] = $request->boolean('show_on_home');
+        $data['home_order'] = (int) $request->input('home_order', 0);
         if ($request->hasFile('image')) {
             if ($d->image_path && Storage::disk('public')->exists($d->image_path)) {
                 Storage::disk('public')->delete($d->image_path);
@@ -98,9 +118,13 @@ class AdminContentController extends Controller
             'type' => 'required|in:home,about',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'sort_order' => 'required|integer',
+            'tag' => 'nullable|string|max:255',
+            'rating' => 'nullable|integer|min:1|max:5',
         ]);
 
         $data = $request->except(['image']);
+        $data['show_on_home'] = $request->boolean('show_on_home');
+        $data['rating'] = (int) ($request->input('rating') ?: 5);
         if ($request->hasFile('image')) {
             $data['avatar_path'] = $request->file('image')->store('images', 'public');
         }
@@ -127,9 +151,13 @@ class AdminContentController extends Controller
             'type' => 'required|in:home,about',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'sort_order' => 'required|integer',
+            'tag' => 'nullable|string|max:255',
+            'rating' => 'nullable|integer|min:1|max:5',
         ]);
 
         $data = $request->except(['image']);
+        $data['show_on_home'] = $request->boolean('show_on_home');
+        $data['rating'] = (int) ($request->input('rating') ?: 5);
         if ($request->hasFile('image')) {
             if ($t->avatar_path && Storage::disk('public')->exists($t->avatar_path)) {
                 Storage::disk('public')->delete($t->avatar_path);

@@ -33,7 +33,7 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            'serve' => false, // the project serves uploads itself via the safe /storage/{path} route in routes/web.php
             'throw' => false,
             'report' => false,
         ],

@@ -546,5 +546,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             HotelsTableSeeder::class,
         ]);
+
+        // Membership plans, offers and FAQs (editable in admin)
+        $this->call(MembershipContentSeeder::class);
+        $this->call(DestinationGroupingSeeder::class);
+        $this->call(CmsHomeSeeder::class);
     }
 }

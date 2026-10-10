@@ -77,10 +77,18 @@
     );
   }
 
-  function buildGrid(tabKey) {
+  function buildGrid(tabKey, showAll) {
     var defaultKey = Object.keys(HOTEL_DATA)[0];
     var rows = HOTEL_DATA[tabKey] || HOTEL_DATA[defaultKey] || [];
-    return '<div class="hotel-tabs__grid">' + rows.map(buildCard).join('') + '</div>';
+    var limit = 6;
+    var shouldLimit = !showAll && rows.length > limit;
+    var visibleRows = shouldLimit ? rows.slice(0, limit) : rows;
+    
+    var html = '<div class="hotel-tabs__grid">' + visibleRows.map(buildCard).join('') + '</div>';
+    if (shouldLimit) {
+       html += '<div class="hotel-tabs__load-more-wrap" style="text-align: center; margin-top: 3rem;"><button type="button" class="btn btn--primary js-load-more" data-tab="'+escapeHtml(tabKey)+'">Load More Hotels</button></div>';
+    }
+    return html;
   }
 
   function initHotelTabs() {
@@ -93,8 +101,15 @@
 
     var surface = document.createElement('div');
     surface.className = 'hotel-tabs__surface';
-    surface.innerHTML = buildGrid(activeKey);
+    surface.innerHTML = buildGrid(activeKey, false);
     root.appendChild(surface);
+
+    surface.addEventListener('click', function(e) {
+      if (e.target.classList.contains('js-load-more')) {
+        var tab = e.target.getAttribute('data-tab');
+        surface.innerHTML = buildGrid(tab, true);
+      }
+    });
 
     function setActiveTab(key) {
       tabs.forEach(function (tab) {
@@ -119,7 +134,7 @@
       surface.classList.add('hotel-tabs__surface--exit');
 
       window.setTimeout(function () {
-        surface.innerHTML = buildGrid(key);
+        surface.innerHTML = buildGrid(key, false);
         surface.classList.remove('hotel-tabs__surface--exit');
         surface.classList.add('hotel-tabs__surface--enter');
         window.requestAnimationFrame(function () {

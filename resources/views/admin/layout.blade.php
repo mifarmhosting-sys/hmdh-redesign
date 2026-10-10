@@ -431,8 +431,8 @@
       <a href="{{ route('admin.settings') }}" class="sidebar-link {{ Request::routeIs('admin.settings') ? 'active' : '' }}">
         <i class="fas fa-cog"></i> Site Settings
       </a>
-      <a href="{{ route('admin.homepage') }}" class="sidebar-link {{ Request::routeIs('admin.homepage') ? 'active' : '' }}">
-        <i class="fas fa-desktop"></i> Home Page Content
+      <a href="{{ route('admin.pages.index') }}" class="sidebar-link {{ Request::routeIs('admin.pages.*') ? 'active' : '' }}">
+        <i class="fas fa-desktop"></i> Page Content
       </a>
       <a href="{{ route('admin.about') }}" class="sidebar-link {{ Request::routeIs('admin.about') ? 'active' : '' }}">
         <i class="fas fa-info-circle"></i> About Page Content
@@ -460,6 +460,15 @@
       </a>
       <a href="{{ route('admin.blogs.comments.index') }}" class="sidebar-link {{ Request::routeIs('admin.blogs.comments.*') ? 'active' : '' }}">
         <i class="fas fa-comments"></i> Blog Comments
+      </a>
+      <a href="{{ route('admin.plans.index') }}" class="sidebar-link {{ Request::routeIs('admin.plans.*') ? 'active' : '' }}">
+        <i class="fas fa-crown"></i> Membership Plans
+      </a>
+      <a href="{{ route('admin.offers.index') }}" class="sidebar-link {{ Request::routeIs('admin.offers.*') ? 'active' : '' }}">
+        <i class="fas fa-tags"></i> Offers
+      </a>
+      <a href="{{ route('admin.faqs.index') }}" class="sidebar-link {{ Request::routeIs('admin.faqs.*') ? 'active' : '' }}">
+        <i class="fas fa-question-circle"></i> FAQs
       </a>
       <a href="{{ route('admin.membership_enquiries.index') }}" class="sidebar-link {{ Request::routeIs('admin.membership_enquiries.*') ? 'active' : '' }}">
         <i class="fas fa-id-card"></i> Membership Enquiries

@@ -1,139 +1,604 @@
-@extends('layouts.app')
-
+@extends('layouts.design')
+@section('title', "Happy Miles Dream Hospitality")
+@section('body_class', "bg-background font-body-md text-on-surface antialiased")
+@push('head')
+@verbatim
+<style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style>
+@endverbatim
+@endpush
 @section('content')
-<section class="inner-banner-benefits">
-  <div class="banner-overlay">
-    <div class="" style="flex: auto;">
-      <h1>Contact Us</h1>
-      <p>Home / Contact Us</p>
-    </div>
-  </div>
-</section>	  
-
-<section class="contact">
-  <!-- HERO -->
-  <div class="contact-hero">
-    <div class="container">
-      <h1>Contact Us</h1>
-      <p>We’re here to help you plan your perfect experience</p>
-    </div>
-  </div>
-
-  <!-- MAIN -->
-  <div class="contact-main container">
-    <!-- LEFT INFO -->
-    <div class="contact-info">
-      <h3>Get in Touch</h3>
-      <p>Have questions about our resorts, memberships or bookings? Our team is ready to assist you.</p>
-
-      <div class="info-item">
-        <strong>📍 Address</strong>
-        <p>{{ $settings->contact_address }}</p>
-      </div>
-
-      <div class="info-item">
-        <strong>📞 Phone</strong>
-        <p>{{ $settings->contact_phone }}</p>
-      </div>
-
-      <div class="info-item">
-        <strong>✉️ Email</strong>
-        <p>{{ $settings->contact_email }}</p>
-      </div>
-
-      <div class="info-item">
-        <strong>⏰ Working Hours</strong>
-        <p>{{ $settings->working_hours }}</p>
-      </div>
-    </div>
-
-    <!-- RIGHT FORM -->
-    <div class="contact-form">
-      <h3>Send a Message</h3>
-
-      @if(session('success'))
-        <div style="background: rgba(14, 180, 100, 0.15); color: #0eb464; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid rgba(14, 180, 100, 0.3); font-weight: 500;">
-          {{ session('success') }}
-        </div>
-      @endif
-
-      <div id="ajax-success" style="display: none; background: rgba(14, 180, 100, 0.15); color: #0eb464; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid rgba(14, 180, 100, 0.3); font-weight: 500;">
-      </div>
-
-      <form id="contact-form-el" action="{{ route('contact.submit') }}" method="POST">
-        @csrf
-        <div class="form-row">
-          <input type="text" name="name" placeholder="Full Name" required>
-          <input type="email" name="email" placeholder="Email Address" required>
-        </div>
-
-        <div class="form-row">
-          <input type="text" name="phone" placeholder="Phone Number">
-          <input type="text" name="subject" placeholder="Subject">
-        </div>
-
-        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-
-        <button type="submit" id="submit-btn">Send Message →</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MAP -->
-  <div class="contact-map">
-    <iframe 
-      src="https://maps.google.com/maps?q={{ urlencode($settings->contact_address ?? 'kolkata') }}&t=&z=13&ie=UTF8&iwloc=&output=embed"
-      frameborder="0"
-      allowfullscreen>
-    </iframe>
-  </div>
-</section>  
+@verbatim
+@endverbatim
+@include('partials.design-header', ['active' => 'contact'])
+@verbatim
+<main class="w-full pt-[116px] bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Sub-Hero / Header Banner -->
+<section class="relative w-full bg-gradient-to-b from-surface-ice/70 via-background to-background pt-8 pb-14 px-margin-mobile lg:px-margin">
+<div class="max-w-7xl mx-auto flex flex-col items-center text-center">
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant mb-space-md">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-lagoon-blue font-semibold">Connect Us</span>
+</nav>
+<!-- Pill Badge -->
+<div class="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-surface-container text-primary font-label-md text-label-md mb-space-md shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-coral-vibrant" style="font-variation-settings: 'FILL' 1;">headset_mic</span>
+<span class="tracking-wide uppercase">24/7 Member Assistance &amp; Corporate Desk</span>
+</div>
+<!-- Main Title & Subtitle -->
+<h1 class="font-headline-xl text-headline-xl text-deep-navy max-w-4xl tracking-tight mb-space-md">
+        We’re Here to Craft Your Perfect Getaway
+      </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
+        Whether you have inquiries about our 25-year vacation memberships, resort reservations across 80+ handcrafted properties, or dining privilege redemptions, our dedicated travel advisors in Kolkata are at your service.
+      </p>
+<!-- Trust Metrics Ribbon -->
+<div class="mt-8 flex flex-wrap justify-center items-center gap-6 text-on-surface-variant font-label-md text-label-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lagoon-blue text-[18px]">verified</span>
+<span>Govt. Regd. Enterprise</span>
+</div>
+<span class="text-surface-dim">|</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sunset-gold text-[18px]">avg_pace</span>
+<span>&lt; 15-Min WhatsApp Response</span>
+</div>
+<span class="text-surface-dim">|</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-coral-vibrant text-[18px]">verified_user</span>
+<span>256-Bit SSL Encrypted Desk</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Contact Channels (4 Feature Cards) -->
+<section class="w-full px-margin-mobile lg:px-margin -mt-6 mb-16">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1: Toll Free -->
+<div class="flex flex-col justify-between bg-surface-container-lowest p-space-lg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-ice text-lagoon-blue flex items-center justify-center mb-space-md shadow-sm">
+<span class="material-symbols-outlined text-[26px]">support_agent</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-sunset-gold font-bold">Priority Voice Support</span>
+<h3 class="font-headline-sm text-headline-sm text-deep-navy mt-1 mb-2">Toll-Free Helpline</h3>
+<p class="font-body-md text-body-md font-semibold text-primary mb-1">1800 2033 188</p>
+<p class="font-body-md text-body-md font-semibold text-primary mb-3">1800-309-8800</p>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-md text-label-md mb-6">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Mon - Sat: 10:00 AM - 7:00 PM</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-lagoon-blue transition-colors shadow-sm" href="tel:18002033188">
+<span class="material-symbols-outlined text-[18px]">call</span>
+<span>Call Toll-Free</span>
+</a>
+</div>
+<!-- Card 2: WhatsApp Concierge -->
+<div class="flex flex-col justify-between bg-surface-container-lowest p-space-lg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<div>
+<div class="w-12 h-12 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mb-space-md shadow-sm">
+<span class="material-symbols-outlined text-[26px]">chat</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-emerald-700 font-bold">Direct Holiday Desk</span>
+<h3 class="font-headline-sm text-headline-sm text-deep-navy mt-1 mb-2">WhatsApp Concierge</h3>
+<p class="font-body-md text-body-md font-semibold text-deep-navy mb-1">+91 98300 00000</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">Instant booking assistance &amp; vouchers</p>
+<div class="flex items-center gap-1.5 text-emerald-700 font-label-md text-label-md mb-6">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span>Avg. response time: &lt; 15 mins</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-emerald-600 text-on-primary font-label-md text-label-md hover:bg-emerald-700 transition-colors shadow-sm" href="https://wa.me/919830000000" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Chat on WhatsApp</span>
+</a>
+</div>
+<!-- Card 3: Email Support -->
+<div class="flex flex-col justify-between bg-surface-container-lowest p-space-lg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-container text-tertiary flex items-center justify-center mb-space-md shadow-sm">
+<span class="material-symbols-outlined text-[26px]">mark_email_read</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-lagoon-blue font-bold">Verified Mail Desks</span>
+<h3 class="font-headline-sm text-headline-sm text-deep-navy mt-1 mb-2">Official Inboxes</h3>
+<div class="space-y-1 mb-3">
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium">care@happymilesdreamhospitality.com</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium">members@happymilesdreamhospitality.com</p>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-md text-label-md mb-6">
+<span class="material-symbols-outlined text-[16px]">hourglass_top</span>
+<span>24-Hour Turnaround Guarantee</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-surface-ice text-lagoon-blue font-label-md text-label-md hover:bg-surface-container transition-colors shadow-sm" href="mailto:care@happymilesdreamhospitality.com">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span>Compose Email</span>
+</a>
+</div>
+<!-- Card 4: Corporate HQ -->
+<div class="flex flex-col justify-between bg-surface-container-lowest p-space-lg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<div>
+<div class="w-12 h-12 rounded-lg bg-sunset-gold/15 text-deep-navy flex items-center justify-center mb-space-md shadow-sm">
+<span class="material-symbols-outlined text-[26px]">apartment</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-sunset-gold font-bold">Kolkata Central</span>
+<h3 class="font-headline-sm text-headline-sm text-deep-navy mt-1 mb-2">Corporate HQ</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-1 line-clamp-2">
+            AVS House, 42/1A Gurupada Halder Road, Kalighat, Kolkata - 700026
+          </p>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-md text-label-md mt-2 mb-6">
+<span class="material-symbols-outlined text-[16px] text-lagoon-blue">directions_walk</span>
+<span>In-person consultations available</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-surface-ice text-lagoon-blue font-label-md text-label-md hover:bg-surface-container transition-colors shadow-sm" href="#map-section">
+<span class="material-symbols-outlined text-[18px]">pin_drop</span>
+<span>View on Map</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Main Interaction Section (2-Column Grid) -->
+<section class="w-full px-margin-mobile lg:px-margin mb-20">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Multi-Purpose Consultation & Callback Form (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-space-lg lg:p-space-xl rounded-xl shadow-md">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-coral-vibrant text-[22px]">contact_page</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-coral-vibrant font-bold">Travel Advisory Desk</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-deep-navy tracking-tight mb-space-xs">
+          Send Us a Message or Request a Callback
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+          Fill out your holiday or membership requirements below. Our Kolkata relationship officer will get back to you with curated options.
+        </p>
+<form class="space-y-5" id="contact-form" >
+<!-- Full Name -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider" for="fullName">
+              Full Name <span class="text-coral-vibrant">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-3 text-[20px] text-on-surface-variant">person</span>
+<input class="w-full pl-11 pr-4 py-3 rounded-lg bg-surface-ice text-on-surface placeholder:text-outline text-body-md font-body-md focus:outline-none focus:ring-2 focus:ring-lagoon-blue shadow-inner" id="fullName" placeholder="e.g., Sourav Ganguly" required="" type="text"/>
+</div>
+</div>
+<!-- Contact Row (Phone + Email) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Phone Number -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider" for="phone">
+                Mobile Number <span class="text-coral-vibrant">*</span>
+</label>
+<div class="flex">
+<span class="inline-flex items-center px-3 rounded-l-lg bg-surface-container text-deep-navy font-label-md text-label-md shadow-inner">
+                  +91
+                </span>
+<input class="w-full px-3.5 py-3 rounded-r-lg bg-surface-ice text-on-surface placeholder:text-outline text-body-md font-body-md focus:outline-none focus:ring-2 focus:ring-lagoon-blue shadow-inner" id="phone" placeholder="98300 12345" required="" type="tel"/>
+</div>
+</div>
+<!-- Email Address -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider" for="email">
+                Email Address <span class="text-coral-vibrant">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-3 text-[20px] text-on-surface-variant">mail</span>
+<input class="w-full pl-11 pr-4 py-3 rounded-lg bg-surface-ice text-on-surface placeholder:text-outline text-body-md font-body-md focus:outline-none focus:ring-2 focus:ring-lagoon-blue shadow-inner" id="email" placeholder="name@example.com" required="" type="email"/>
+</div>
+</div>
+</div>
+<!-- City & Inquiry Type Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- City / Location -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider" for="city">
+                City / Location
+              </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-3 text-[20px] text-on-surface-variant">location_city</span>
+<select class="w-full pl-11 pr-8 py-3 rounded-lg bg-surface-ice text-on-surface text-body-md font-body-md focus:outline-none focus:ring-2 focus:ring-lagoon-blue appearance-none shadow-inner cursor-pointer" id="city">
+<option value="kolkata">Kolkata</option>
+<option value="howrah">Howrah</option>
+<option value="siliguri">Siliguri</option>
+<option value="durgapur">Durgapur &amp; Asansol</option>
+<option value="bhubaneswar">Bhubaneswar / Cuttack</option>
+<option value="other">Other City</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3.5 text-[20px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Inquiry Subject -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider" for="inquiryType">
+                Inquiry Type <span class="text-coral-vibrant">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-3 text-[20px] text-on-surface-variant">interests</span>
+<select class="w-full pl-11 pr-8 py-3 rounded-lg bg-surface-ice text-on-surface text-body-md font-body-md focus:outline-none focus:ring-2 focus:ring-lagoon-blue appearance-none shadow-inner cursor-pointer" id="inquiryType" required="">
+<option value="vacation-ownership">25-Year Vacation Membership Inquiry</option>
+<option value="existing-booking">Existing Member Booking / Reservation</option>
+<option value="bbq-privilege">Barbeque Nation &amp; Dining Privileges</option>
+<option value="day-out-rupasi">Day-Out Excursion (Rupasi Rupnarayan Kuthi)</option>
+<option value="resort-partnership">Resort Partnership &amp; Affiliation</option>
+<option value="billing-assistance">Billing / EMI Assistance</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3.5 text-[20px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Preferred Contact Window -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider">
+              Preferred Callback Time
+            </label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+<label class="flex items-center gap-2 p-2.5 rounded-lg bg-surface-ice hover:bg-surface-container cursor-pointer transition-colors shadow-inner">
+<input checked="" class="text-lagoon-blue focus:ring-lagoon-blue" name="preferredTime" type="radio" value="morning"/>
+<span class="font-body-sm text-body-sm text-on-surface">Morning (10am - 1pm)</span>
+</label>
+<label class="flex items-center gap-2 p-2.5 rounded-lg bg-surface-ice hover:bg-surface-container cursor-pointer transition-colors shadow-inner">
+<input class="text-lagoon-blue focus:ring-lagoon-blue" name="preferredTime" type="radio" value="afternoon"/>
+<span class="font-body-sm text-body-sm text-on-surface">Afternoon (1pm - 5pm)</span>
+</label>
+<label class="flex items-center gap-2 p-2.5 rounded-lg bg-surface-ice hover:bg-surface-container cursor-pointer transition-colors shadow-inner">
+<input class="text-lagoon-blue focus:ring-lagoon-blue" name="preferredTime" type="radio" value="evening"/>
+<span class="font-body-sm text-body-sm text-on-surface">Evening (5pm - 8pm)</span>
+</label>
+</div>
+</div>
+<!-- Message Field -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider" for="message">
+              Message or Specific Vacation Dates
+            </label>
+<textarea class="w-full p-3.5 rounded-lg bg-surface-ice text-on-surface placeholder:text-outline text-body-md font-body-md focus:outline-none focus:ring-2 focus:ring-lagoon-blue shadow-inner" id="message" placeholder="Tell us about your holiday plans, desired destinations (e.g., Goa, Andaman, Puri, Mandarmani), family members traveling, or membership questions..." rows="4"></textarea>
+</div>
+<!-- WhatsApp Opt-In Checkbox -->
+<div class="flex items-start gap-3 pt-1">
+<input checked="" class="mt-1 w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500" id="whatsappOptIn" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface-variant cursor-pointer" for="whatsappOptIn">
+              I agree to receive personalized itinerary proposals, membership brochures, and booking updates on WhatsApp.
+            </label>
+</div>
+<!-- Submit Button -->
+<div class="pt-3">
+<button class="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-secondary-container via-coral-vibrant to-secondary text-on-primary font-headline-sm text-headline-sm shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[22px]">send</span>
+<span>Submit Inquiry &amp; Request Callback</span>
+</button>
+<div class="flex items-center justify-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm mt-3">
+<span class="material-symbols-outlined text-[15px] text-emerald-600">lock</span>
+<span>Your personal contact information is encrypted and never shared.</span>
+</div>
+</div>
+<!-- Success Notification Banner -->
+<div class="hidden p-4 rounded-lg bg-emerald-50 text-emerald-800 shadow-md" id="form-success-banner">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600">check_circle</span>
+<p class="font-body-md text-body-md font-semibold">Inquiry submitted successfully!</p>
+</div>
+<p class="font-body-sm text-body-sm text-emerald-700 mt-1 pl-7">A dedicated travel specialist will contact you via your preferred window.</p>
+</div>
+</form>
+</div>
+<!-- Right Column: Office Hubs & Escalation Matrix (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Kolkata Headquarters Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-md">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-sunset-gold font-bold">Registered Corporate Office</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm">Kalighat Metro Hub</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-2">Kolkata Headquarters</h3>
+<p class="font-body-md text-body-md text-on-surface mb-3 leading-relaxed">
+            AVS House, 42/1A Gurupada Halder Road, Kalighat, Kolkata - 700026, West Bengal, India.
+          </p>
+<div class="space-y-2 mb-4 font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-lagoon-blue">schedule</span>
+<span>Monday to Saturday: 10:00 AM – 7:00 PM IST</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-coral-vibrant">near_me</span>
+<span>5 min walk from Kalighat Metro Station &amp; Temple</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-2 pt-2">
+<a class="flex-1 inline-flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-surface-ice text-lagoon-blue font-label-md text-label-md hover:bg-surface-container transition-colors shadow-sm" href="#map-section">
+<span class="material-symbols-outlined text-[18px]">navigation</span>
+<span>Get Directions</span>
+</a>
+<a class="flex-1 inline-flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-deep-navy text-surface-container-lowest font-label-md text-label-md hover:bg-primary transition-colors shadow-sm" href="https://wa.me/919830000000?text=I%20would%20like%20to%20schedule%20an%20office%20appointment" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+<span>Book Appointment</span>
+</a>
+</div>
+</div>
+<!-- Regional Liaison & Concierge Desks -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-md">
+<h4 class="font-headline-sm text-headline-sm text-deep-navy mb-3">Regional Desks &amp; Liaison Points</h4>
+<div class="space-y-3 font-body-sm text-body-sm">
+<div class="p-3 rounded-lg bg-surface-ice">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-deep-navy">Siliguri &amp; North Bengal Desk</span>
+<span class="text-sunset-gold font-label-sm text-label-sm uppercase">Himalayan Hub</span>
+</div>
+<p class="text-on-surface-variant mt-0.5">Sevoke Road, Near Planet Mall, Siliguri - 734001</p>
+</div>
+<div class="p-3 rounded-lg bg-surface-ice">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-deep-navy">Bhubaneswar &amp; Puri Coordination</span>
+<span class="text-lagoon-blue font-label-sm text-label-sm uppercase">Coastal Hub</span>
+</div>
+<p class="text-on-surface-variant mt-0.5">VIP Road, Near Sea Beach, Puri - 752002, Odisha</p>
+</div>
+<div class="p-3 rounded-lg bg-surface-ice">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-deep-navy">Guwahati &amp; Northeast Gateway</span>
+<span class="text-coral-vibrant font-label-sm text-label-sm uppercase">Regional Desk</span>
+</div>
+<p class="text-on-surface-variant mt-0.5">GS Road, Christian Basti, Guwahati - 781005, Assam</p>
+</div>
+</div>
+</div>
+<!-- Dedicated Department Escalation Matrix -->
+<div class="bg-deep-navy text-surface-container-lowest p-space-lg rounded-xl shadow-md">
+<div class="flex items-center gap-2 mb-2 text-sunset-gold">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+<span class="font-label-md text-label-md uppercase tracking-wider font-bold">Escalation &amp; Departments</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm mb-4">Direct Support Directory</h4>
+<div class="space-y-3.5 font-body-sm text-body-sm">
+<div class="pb-3 bg-primary/20 p-2.5 rounded-lg">
+<div class="flex justify-between items-center">
+<span class="text-sunset-gold font-semibold">New Membership &amp; Sales</span>
+<span class="font-label-sm text-label-sm text-surface-dim">Ext. 101</span>
+</div>
+<a class="text-surface-dim hover:text-surface-container-lowest transition-colors break-all" href="mailto:sales@happymilesdreamhospitality.com">sales@happymilesdreamhospitality.com</a>
+</div>
+<div class="pb-3 bg-primary/20 p-2.5 rounded-lg">
+<div class="flex justify-between items-center">
+<span class="text-tertiary-fixed-dim font-semibold">Member Bookings &amp; Concierge</span>
+<span class="font-label-sm text-label-sm text-surface-dim">Ext. 102</span>
+</div>
+<a class="text-surface-dim hover:text-surface-container-lowest transition-colors break-all" href="mailto:bookings@happymilesdreamhospitality.com">bookings@happymilesdreamhospitality.com</a>
+</div>
+<div class="bg-primary/20 p-2.5 rounded-lg">
+<div class="flex justify-between items-center">
+<span class="text-coral-vibrant font-semibold">Grievance &amp; Escalation</span>
+<span class="font-label-sm text-label-sm text-sunset-gold">Principal Officer</span>
+</div>
+<a class="text-surface-dim hover:text-surface-container-lowest transition-colors break-all" href="mailto:grievance@happymilesdreamhospitality.com">grievance@happymilesdreamhospitality.com</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Map & How to Reach Us Section -->
+<section class="w-full px-margin-mobile lg:px-margin mb-20" id="map-section">
+<div class="max-w-7xl mx-auto bg-surface-container-lowest rounded-xl shadow-md overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-12">
+<!-- Map Embed Container (7 Cols) -->
+<div class="lg:col-span-7 relative min-h-[380px] bg-surface-container flex flex-col justify-end p-6">
+<div class="absolute inset-0 w-full h-full bg-cover bg-center" data-location="AVS House, Gurupada Halder Road, Kalighat, Kolkata" style="background-image: url('/images/design/823cdb0ca760.png')"></div>
+<!-- Translucent Floating Pin Details Overlay -->
+<div class="relative z-10 bg-deep-navy/90 backdrop-blur-md p-space-md rounded-lg text-surface-container-lowest max-w-md shadow-lg">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-coral-vibrant text-[20px]">location_on</span>
+<span class="font-headline-sm text-headline-sm">Happy Miles Dream HQ</span>
+</div>
+<p class="font-body-sm text-body-sm text-surface-dim leading-relaxed">
+              AVS House, 42/1A Gurupada Halder Road, Kalighat, Kolkata 700026
+            </p>
+<div class="mt-3 flex items-center gap-3">
+<a class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-sunset-gold text-deep-navy font-label-md text-label-md hover:bg-surface-container-lowest transition-colors font-bold shadow-sm" href="https://maps.google.com/?q=AVS+House+Gurupada+Halder+Road+Kalighat+Kolkata" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+<span>Open in Google Maps</span>
+</a>
+<span class="font-label-sm text-label-sm text-surface-dim">Verified GPS Coordinates</span>
+</div>
+</div>
+</div>
+<!-- How to Reach Transit Guidance (5 Cols) -->
+<div class="lg:col-span-5 p-space-lg lg:p-space-xl flex flex-col justify-between bg-surface-ice/40">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-lagoon-blue text-[20px]">commute</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-lagoon-blue font-bold">Transit &amp; Accessibility</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-4">How to Reach Our Kolkata Lounge</h3>
+<div class="space-y-4 font-body-sm text-body-sm">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-lagoon-blue shrink-0">
+<span class="material-symbols-outlined text-[18px]">subway</span>
+</div>
+<div>
+<h4 class="font-semibold text-deep-navy">By Metro Railway (Blue Line)</h4>
+<p class="text-on-surface-variant">Exit Kalighat Metro Station via Gate 2. It is an easy 400-meter straight walk (approx. 5 minutes) down Gurupada Halder Road.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-lagoon-blue shrink-0">
+<span class="material-symbols-outlined text-[18px]">train</span>
+</div>
+<div>
+<h4 class="font-semibold text-deep-navy">From Howrah Railway Station</h4>
+<p class="text-on-surface-variant">Approx. 8.5 km via Vidyasagar Setu (25-35 minutes drive by cab or ride-share during standard traffic hours).</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-lagoon-blue shrink-0">
+<span class="material-symbols-outlined text-[18px]">flight</span>
+</div>
+<div>
+<h4 class="font-semibold text-deep-navy">From Netaji Subhash Chandra Bose Airport (CCU)</h4>
+<p class="text-on-surface-variant">Approx. 22 km via Maa Flyover (45-60 mins drive). Direct prepaid taxi stands available at Arrival Gate.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Coffee Walkthrough Invite -->
+<div class="mt-8 p-4 rounded-lg bg-surface-container-lowest shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-sunset-gold/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">local_cafe</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-deep-navy font-bold">Schedule an In-Person Coffee</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Membership Walkthrough at our Kolkata Lounge</p>
+</div>
+</div>
+<a class="p-2 rounded-lg bg-surface-ice text-lagoon-blue hover:bg-surface-container transition-colors" href="tel:18002033188">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Frequently Asked Questions (FAQ Accordion) -->
+<section class="w-full px-margin-mobile lg:px-margin mb-20">
+<div class="max-w-4xl mx-auto">
+<div class="text-center mb-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-primary font-label-md text-label-md mb-2">
+<span class="material-symbols-outlined text-[16px]">help</span>
+<span>Answers to Common Inquiries</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-deep-navy">Frequently Asked Questions</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Have a quick question before getting in touch? Check our quick answers below.</p>
+</div>
+<div class="space-y-3" id="faq-accordion">
+<!-- FAQ 1 -->
+<details class="group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200" open="">
+<summary class="flex items-center justify-between p-space-md lg:p-space-lg cursor-pointer list-none font-headline-sm text-headline-sm text-deep-navy">
+<span>How soon will a travel advisor contact me after submitting the inquiry?</span>
+<span class="material-symbols-outlined text-lagoon-blue transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-space-md lg:px-space-lg pb-space-lg font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Within 2 to 4 business hours during working hours (Monday to Saturday, 10:00 AM – 7:00 PM IST). If you opt in for WhatsApp updates, an advisor will typically send a message or voice note within 15 minutes.
+          </div>
+</details>
+<!-- FAQ 2 -->
+<details class="group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200">
+<summary class="flex items-center justify-between p-space-md lg:p-space-lg cursor-pointer list-none font-headline-sm text-headline-sm text-deep-navy">
+<span>How can existing members make priority resort reservations?</span>
+<span class="material-symbols-outlined text-lagoon-blue transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-space-md lg:px-space-lg pb-space-lg font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Existing members can either log directly into the Member Portal using their Membership ID or reach out to our dedicated 24/7 Member Desk at <span class="font-semibold text-deep-navy">members@happymilesdreamhospitality.com</span> or on the dedicated member WhatsApp hotline.
+          </div>
+</details>
+<!-- FAQ 3 -->
+<details class="group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200">
+<summary class="flex items-center justify-between p-space-md lg:p-space-lg cursor-pointer list-none font-headline-sm text-headline-sm text-deep-navy">
+<span>Can I visit the Kolkata office to inspect agreements and membership deeds before enrolling?</span>
+<span class="material-symbols-outlined text-lagoon-blue transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-space-md lg:px-space-lg pb-space-lg font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Yes, absolutely. We welcome walk-ins and scheduled appointments at AVS House, Kalighat. Our Senior Membership Directors will guide you through transparent terms, exchange affiliations, Barbeque Nation voucher structures, and verified resort portfolios over coffee.
+          </div>
+</details>
+<!-- FAQ 4 -->
+<details class="group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200">
+<summary class="flex items-center justify-between p-space-md lg:p-space-lg cursor-pointer list-none font-headline-sm text-headline-sm text-deep-navy">
+<span>What should I do if I need urgent booking modifications during travel?</span>
+<span class="material-symbols-outlined text-lagoon-blue transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-space-md lg:px-space-lg pb-space-lg font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Every confirmed voucher includes the direct mobile contact of the on-ground resort manager and a 24-hour emergency holiday line. You can also dial our toll-free hotline (1800 2033 188) and choose emergency dispatch option 9.
+          </div>
+</details>
+</div>
+</div>
+</section>
+<!-- High-Impact Closing CTA Banner -->
+<section class="w-full px-margin-mobile lg:px-margin mb-12">
+<div class="max-w-7xl mx-auto rounded-xl bg-gradient-to-r from-deep-navy via-primary to-primary-container p-8 lg:p-14 text-surface-container-lowest shadow-xl relative overflow-hidden">
+<!-- Decorative Backdrop Graphic -->
+<div class="absolute right-0 top-0 w-96 h-96 bg-sunset-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+<div class="max-w-2xl text-center lg:text-left">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-lowest/15 text-sunset-gold font-label-md text-label-md mb-4 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[16px]">star</span>
+<span>25-Year Luxury Vacation Club</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-surface-container-lowest tracking-tight mb-3">
+            Ready to Plan Your Next Unforgettable Journey?
+          </h2>
+<p class="font-body-lg text-body-lg text-surface-dim leading-relaxed">
+            Speak directly with our senior holiday curator today or download our complete 2025–2026 Destinations &amp; Handcrafted Resort Directory.
+          </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full sm:w-auto">
+<a class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-gradient-to-r from-secondary-container via-coral-vibrant to-secondary text-on-primary font-headline-sm text-headline-sm shadow-md hover:opacity-95 transition-all text-center flex items-center justify-center gap-2" href="tel:18002033188">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span>Call Toll-Free Now</span>
+</a>
+<a class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-surface-container-lowest text-deep-navy font-headline-sm text-headline-sm shadow-md hover:bg-sunset-gold transition-colors text-center flex items-center justify-center gap-2" href="https://wa.me/919830000000" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px] text-emerald-600">chat</span>
+<span>Start WhatsApp Chat</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-deep-navy text-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.08)]"><div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin py-space-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter"><div class="flex flex-col gap-space-md"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-lagoon-blue flex items-center justify-center text-sunset-gold"><span class="material-symbols-outlined text-[20px]">hotel_class</span></div><div class="flex flex-col"><span class="font-label-lg text-label-lg uppercase tracking-wide text-surface-container-lowest">Happy Miles Dream</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-sunset-gold">Hospitality</span></div></div><p class="font-body-sm text-body-sm text-surface-dim leading-relaxed">Crafting peerless luxury vacation ownership, coastal sanctuaries, and transformative hospitality journeys tailored for distinguished families and discerning travelers across Asia.</p><div class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-tertiary/70 text-sunset-gold font-label-sm text-label-sm max-w-max shadow-[0_1px_4px_rgba(0,0,0,0.2)]"><span class="material-symbols-outlined text-[14px]">verified</span><span>IATA Affiliate Partner &amp; Govt. Regd. Enterprise</span></div></div><div class="flex flex-col gap-space-sm"><h4 class="font-headline-sm text-headline-sm text-surface-container-lowest font-semibold">Verticals &amp; Offerings</h4><ul class="flex flex-col gap-space-xs font-body-sm text-body-sm text-surface-dim"><li class="hover:text-sunset-gold transition-colors"><a data-path="verticals" href="/benefits.html">Luxury Vacation Ownership</a></li><li class="hover:text-sunset-gold transition-colors"><a data-path="verticals" href="/benefits.html">Coastal Beach Villas</a></li><li class="hover:text-sunset-gold transition-colors"><a data-path="verticals" href="/benefits.html">MICE &amp; Corporate Retreats</a></li><li class="hover:text-sunset-gold transition-colors"><a data-path="verticals" href="/benefits.html">Culinary Wellness Resorts</a></li><li class="hover:text-sunset-gold transition-colors"><a data-path="verticals" href="/benefits.html">Exchange Escapes</a></li></ul></div><div class="flex flex-col gap-space-sm"><h4 class="font-headline-sm text-headline-sm text-surface-container-lowest font-semibold">Destinations &amp; Stays</h4><ul class="flex flex-col gap-space-xs font-body-sm text-body-sm text-surface-dim"><li class="hover:text-sunset-gold transition-colors"><a data-path="destination" href="/destinations.html">Goa Sunset Shore</a></li><li class="hover:text-sunset-gold transition-colors"><a data-path="destination" href="/destinations.html">Andaman Coral Bay</a></li><li class="hover:text-sunset-gold transition-colors"><a data-path="destination" href="/destinations.html">Kerala Lagoon Haven</a></li><li class="hover:text-sunset-gold transition-colors"><a data-path="destination" href="/destinations.html">Puri Coastal Sanctuary</a></li><li class="hover:text-sunset-gold transition-colors"><a data-path="destination" href="/destinations.html">International Gateways</a></li></ul></div><div class="flex flex-col gap-space-sm"><h4 class="font-headline-sm text-headline-sm text-surface-container-lowest font-semibold">Registered Office</h4><div class="font-body-sm text-body-sm text-surface-dim space-y-space-xs"><p>AVS House, 42/1A Gurupada Halder Road, Kolkata - 700026, West Bengal, India.</p><p class="text-surface-container-lowest font-medium">Phone: 1800 2033 188 / 1800-309-8800</p></div><a class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded-lg bg-surface-container-lowest text-deep-navy font-label-md text-label-md hover:bg-sunset-gold transition-colors mt-space-xs max-w-max" data-path="connect-us" href="/contact-us.html"><span class="material-symbols-outlined text-[18px] text-lagoon-blue">chat</span><span>WhatsApp Support</span></a></div></div><div class="bg-on-background/70 py-space-md"><div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin flex flex-col md:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-surface-dim"><p>© 2025 The Happy Miles Dream Hospitality Ltd. • Registered at Kolkata, West Bengal.</p><div class="flex items-center gap-space-md"><a class="hover:text-sunset-gold transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a><span>|</span><a class="hover:text-sunset-gold transition-colors" data-path="terms-of-membership" href="#">Terms of Membership</a><span>|</span><span class="flex items-center gap-space-xs text-sunset-gold"><span class="material-symbols-outlined text-[14px]">shield</span>256-Bit SSL Secured</span></div></div></div></footer>
+@endverbatim
 @endsection
 
-@section('scripts')
+@push('scripts')
+@verbatim
 <script>
-  document.getElementById('contact-form-el').addEventListener('submit', function(e) {
-    var form = this;
-    // Check if fetch is supported, else submit standard form
-    if (typeof fetch !== 'function') return;
+  // Sends the design's enquiry form to the existing contact endpoint (ContactMessage), keeping the design's success banner.
+  (function () {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    var banner = document.getElementById('form-success-banner');
+    var btn = form.querySelector('button[type="submit"]');
+    var val = function (id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+    var label = function (id) { var el = document.getElementById(id); return el && el.selectedOptions && el.selectedOptions[0] ? el.selectedOptions[0].text : ''; };
 
-    e.preventDefault();
-    var btn = document.getElementById('submit-btn');
-    var successDiv = document.getElementById('ajax-success');
-    
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var timeEl = form.querySelector('input[name="preferredTime"]:checked');
+      var optIn = document.getElementById('whatsappOptIn');
+      var extra = [
+        'City: ' + label('city'),
+        'Preferred callback: ' + (timeEl ? timeEl.value : ''),
+        'WhatsApp updates: ' + (optIn && optIn.checked ? 'yes' : 'no')
+      ].join('
+');
 
-    var formData = new FormData(form);
+      var body = new FormData();
+      body.append('name', val('fullName'));
+      body.append('email', val('email'));
+      body.append('phone', val('phone'));
+      body.append('subject', label('inquiryType'));
+      body.append('message', (val('message') || 'Callback request') + '
 
-    fetch(form.action, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      }
-    })
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      btn.disabled = false;
-      btn.textContent = 'Send Message →';
-      if (data.success) {
-        successDiv.textContent = data.success;
-        successDiv.style.display = 'block';
+' + extra);
+
+      var token = document.querySelector('meta[name="csrf-token"]');
+      if (btn) btn.disabled = true;
+      fetch('/contact-us.html', {
+        method: 'POST',
+        body: body,
+        headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json', 'X-CSRF-TOKEN': token ? token.content : '' }
+      }).then(function (r) {
+        if (!r.ok) throw r;
+        banner.classList.remove('hidden');
+        banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
         form.reset();
-        
-        // Scroll to success message
-        successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    })
-    .catch(function(err) {
-      btn.disabled = false;
-      btn.textContent = 'Send Message →';
-      form.submit(); // Fallback to normal post on network error
+      }).catch(function () {
+        alert('Sorry, we could not send your enquiry. Please check the details and try again, or call us.');
+      }).finally(function () { if (btn) btn.disabled = false; });
     });
-  });
+  })();
 </script>
-@endsection
+@endverbatim
+@endpush

@@ -40,9 +40,19 @@ class AdminHotelController extends Controller
             'view_url' => 'nullable|string',
             'sort_order' => 'required|integer',
             'categories' => 'required|array',
+            'region' => 'nullable|string|max:255',
+            'theme' => 'nullable|string|max:255',
+            'badge' => 'nullable|string|max:255',
+            'amenities' => 'nullable|string',
+            'privilege_label' => 'nullable|string|max:255',
+            'privilege_value' => 'nullable|string|max:255',
+            'home_order' => 'nullable|integer',
         ]);
 
         $data = $request->except(['image', 'categories']);
+        $data['is_featured'] = $request->boolean('is_featured');
+        $data['show_on_home'] = $request->boolean('show_on_home');
+        $data['home_order'] = (int) $request->input('home_order', 0);
         
         if ($request->hasFile('image')) {
             $data['image_path'] = $request->file('image')->store('images', 'public');
@@ -79,9 +89,19 @@ class AdminHotelController extends Controller
             'view_url' => 'nullable|string',
             'sort_order' => 'required|integer',
             'categories' => 'required|array',
+            'region' => 'nullable|string|max:255',
+            'theme' => 'nullable|string|max:255',
+            'badge' => 'nullable|string|max:255',
+            'amenities' => 'nullable|string',
+            'privilege_label' => 'nullable|string|max:255',
+            'privilege_value' => 'nullable|string|max:255',
+            'home_order' => 'nullable|integer',
         ]);
 
         $data = $request->except(['image', 'categories']);
+        $data['is_featured'] = $request->boolean('is_featured');
+        $data['show_on_home'] = $request->boolean('show_on_home');
+        $data['home_order'] = (int) $request->input('home_order', 0);
 
         if ($request->hasFile('image')) {
             if ($hotel->image_path && Storage::disk('public')->exists($hotel->image_path)) {

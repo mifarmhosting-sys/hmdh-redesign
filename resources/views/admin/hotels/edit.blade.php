@@ -99,6 +99,8 @@
       </div>
     </div>
 
+    @include('admin.hotels._extra')
+
     <div style="margin-top: 30px; display: flex; justify-content: flex-end;">
       <button type="submit" class="btn btn-primary">
         <i class="fas fa-save"></i> Save Changes

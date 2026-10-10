@@ -15,6 +15,9 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    // Secret for the maintenance URLs (/run-migrations?key=...). Leave empty to disable them.
+    'deploy_key' => env('DEPLOY_KEY'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

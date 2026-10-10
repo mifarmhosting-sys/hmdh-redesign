@@ -5,7 +5,211 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+/*
+ * Happy Miles design system.
+ * GENERATED from the Tailwind configs inside hmdh-new-design/*\/code.html (all 7 pages share one theme),
+ * so the utility names used in the design mock-ups (bg-coral-vibrant, text-headline-lg, gap-space-md …) work unchanged.
+ */
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-on-surface-variant: #41484e;
+    --color-on-primary: #ffffff;
+    --color-sunset-gold: #E5A93C;
+    --color-on-primary-fixed-variant: #004b70;
+    --color-surface-container-low: #edf4ff;
+    --color-primary-fixed-dim: #94cdfa;
+    --color-tertiary-fixed-dim: #8bcff6;
+    --color-on-secondary-container: #682800;
+    --color-outline: #71787f;
+    --color-on-tertiary-fixed: #001e2c;
+    --color-secondary-fixed-dim: #ffb693;
+    --color-primary-fixed: #cae6ff;
+    --color-on-tertiary-container: #83c6ed;
+    --color-on-error: #ffffff;
+    --color-lagoon-blue: #045279;
+    --color-surface-container-high: #d9eaff;
+    --color-on-surface: #0a1d2d;
+    --color-surface-ice: #EBF6FB;
+    --color-on-primary-fixed: #001e30;
+    --color-tertiary-container: #005371;
+    --color-tertiary: #003b52;
+    --color-coral-vibrant: #D3491C;
+    --color-on-secondary: #ffffff;
+    --color-surface-tint: #24638b;
+    --color-on-secondary-fixed-variant: #7a3000;
+    --color-primary: #003a58;
+    --color-deep-navy: #0B1E2E;
+    --color-on-primary-container: #8cc5f1;
+    --color-inverse-on-surface: #e8f2ff;
+    --color-inverse-surface: #203243;
+    --color-tertiary-fixed: #c3e7ff;
+    --color-surface-bright: #f7f9ff;
+    --color-error: #ba1a1a;
+    --color-on-tertiary: #ffffff;
+    --color-background: #f7f9ff;
+    --color-surface: #f7f9ff;
+    --color-surface-container-lowest: #ffffff;
+    --color-on-error-container: #93000a;
+    --color-outline-variant: #c1c7cf;
+    --color-surface-variant: #d2e4fb;
+    --color-on-background: #0a1d2d;
+    --color-inverse-primary: #94cdfa;
+    --color-secondary-container: #ff8340;
+    --color-surface-dim: #c9dcf2;
+    --color-surface-container: #e3efff;
+    --color-on-secondary-fixed: #341000;
+    --color-surface-container-highest: #d2e4fb;
+    --color-on-tertiary-fixed-variant: #004c69;
+    --color-secondary: #a04100;
+    --color-primary-container: #045279;
+    --color-secondary-fixed: #ffdbcb;
+    --color-error-container: #ffdad6;
+
+    --font-body-md: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-headline-lg: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-label-sm: Outfit, ui-sans-serif, system-ui, sans-serif;
+    --font-label-lg: Outfit, ui-sans-serif, system-ui, sans-serif;
+    --font-body-lg: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-headline-xl: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-headline-sm: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-headline-md: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-headline-lg-mobile: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-body-sm: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-label-md: Outfit, ui-sans-serif, system-ui, sans-serif;
+    --font-headline-xl-mobile: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --text-body-md: 15px;
+    --text-body-md--line-height: 24px;
+    --text-body-md--font-weight: 400;
+    --text-headline-lg: 36px;
+    --text-headline-lg--line-height: 44px;
+    --text-headline-lg--font-weight: 600;
+    --text-label-sm: 10px;
+    --text-label-sm--line-height: 14px;
+    --text-label-sm--font-weight: 700;
+    --text-label-lg: 14px;
+    --text-label-lg--line-height: 20px;
+    --text-label-lg--font-weight: 600;
+    --text-body-lg: 18px;
+    --text-body-lg--line-height: 28px;
+    --text-body-lg--font-weight: 400;
+    --text-headline-xl: 48px;
+    --text-headline-xl--line-height: 56px;
+    --text-headline-xl--font-weight: 700;
+    --text-headline-sm: 20px;
+    --text-headline-sm--line-height: 28px;
+    --text-headline-sm--font-weight: 600;
+    --text-headline-md: 24px;
+    --text-headline-md--line-height: 32px;
+    --text-headline-md--font-weight: 600;
+    --text-headline-lg-mobile: 26px;
+    --text-headline-lg-mobile--line-height: 34px;
+    --text-headline-lg-mobile--font-weight: 600;
+    --text-body-sm: 13px;
+    --text-body-sm--line-height: 20px;
+    --text-body-sm--font-weight: 400;
+    --text-label-md: 12px;
+    --text-label-md--line-height: 16px;
+    --text-label-md--font-weight: 600;
+    --text-headline-xl-mobile: 32px;
+    --text-headline-xl-mobile--line-height: 40px;
+    --text-headline-xl-mobile--font-weight: 700;
+
+    --spacing-gutter-mobile: 0.75rem;
+    --spacing-margin: 3rem;
+    --spacing-space-lg: 1.5rem;
+    --spacing-space-sm: 0.5rem;
+    --spacing-space-xs: 0.25rem;
+    --spacing-margin-mobile: 1.25rem;
+    --spacing-gutter: 1.5rem;
+    --spacing-space-md: 1rem;
+    --spacing-space-xl: 2.5rem;
+
+    /* Tailwind v3 radius / shadow / blur scale, which the mock-ups were designed against */
+    --radius-sm: 0.125rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --shadow-xs: 0 0 #0000;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    --blur-sm: 4px;
+
+    --animate-float: float 9s ease-in-out infinite;
+    --animate-shimmer: shimmer 2.8s linear infinite;
+}
+
+@layer base {
+    /* Tailwind v3 defaults that v4 changed */
+    *, ::after, ::before, ::backdrop, ::file-selector-button {
+        border-color: #e5e7eb;
+    }
+    ::placeholder { color: #9ca3af; }
+    button:not(:disabled), [role='button']:not(:disabled) { cursor: pointer; }
+    html { scroll-behavior: smooth; }
+    ::-webkit-scrollbar { display: none; }
+    body { overscroll-behavior: none; }
+    main > :first-child { margin-top: 0 !important; }
+    main > :last-child { margin-bottom: 0 !important; }
+}
+
+/* Utilities that Tailwind v4 dropped but the mock-ups use */
+@utility flex-grow { flex-grow: 1; }
+@utility flex-shrink-0 { flex-shrink: 0; }
+@utility flex-shrink { flex-shrink: 1; }
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    line-height: 1;
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion                                                              */
+/* ------------------------------------------------------------------ */
+@keyframes revealUp    { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
+@keyframes revealLeft  { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: none; } }
+@keyframes revealRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
+@keyframes revealZoom  { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: none; } }
+@keyframes headerDrop  { from { opacity: 0; transform: translateY(-100%); } to { opacity: 1; transform: none; } }
+@keyframes float       { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -24px, 0); } }
+@keyframes kenburns    { from { transform: scale(1); } to { transform: scale(1.1); } }
+@keyframes shimmer     { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes pulseRing   { 0% { box-shadow: 0 0 0 0 rgb(37 211 102 / 0.55); } 70% { box-shadow: 0 0 0 18px rgb(37 211 102 / 0); } 100% { box-shadow: 0 0 0 0 rgb(37 211 102 / 0); } }
+
+.js .reveal { opacity: 0; }
+.js .reveal.is-visible {
+    animation: revealUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0ms);
+}
+.js .reveal[data-reveal='left'].is-visible  { animation-name: revealLeft; }
+.js .reveal[data-reveal='right'].is-visible { animation-name: revealRight; }
+.js .reveal[data-reveal='zoom'].is-visible  { animation-name: revealZoom; }
+
+header.fixed { animation: headerDrop 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; transition: box-shadow 0.3s ease; }
+header.fixed.is-scrolled { box-shadow: 0 8px 28px -10px rgb(11 30 46 / 0.35); }
+
+.kenburns { animation: kenburns 22s ease-in-out infinite alternate; transform-origin: center; }
+.blur-3xl.pointer-events-none { animation: var(--animate-float); }
+.blur-3xl.pointer-events-none:nth-of-type(2n) { animation-delay: -4s; animation-duration: 12s; }
+
+a[class*='bg-coral-vibrant'], button[class*='bg-coral-vibrant'] {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
+}
+a[class*='bg-coral-vibrant']:hover, button[class*='bg-coral-vibrant']:hover { transform: translateY(-2px); }
+a[class*='bg-coral-vibrant']:active, button[class*='bg-coral-vibrant']:active { transform: translateY(0) scale(0.98); }
+a[href*='wa.me'][class*='fixed'], a[class*='fixed'][class*='whatsapp'] { animation: pulseRing 2.4s infinite; }
+
+.hm-mobile-toggle { display: none; }
+@media (max-width: 1279px) { .hm-mobile-toggle { display: inline-flex; } }
+.hm-mobile-nav { display: none; }
+.hm-mobile-nav.is-open { display: block; animation: revealUp 0.35s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1 !important; }
+    .js .reveal.is-visible, header.fixed, .kenburns, .blur-3xl.pointer-events-none { animation: none !important; }
+    html { scroll-behavior: auto; }
 }

@@ -15,7 +15,26 @@ class Hotel extends Model
         'image_path',
         'view_url',
         'sort_order',
+        'show_on_home',
+        'home_order',
+        'region',
+        'theme',
+        'badge',
+        'amenities',
+        'privilege_label',
+        'privilege_value',
+        'is_featured',
     ];
+
+    protected $casts = [
+        'is_featured' => 'boolean',
+    ];
+
+    /** @return string[] amenity tags, one per line */
+    public function amenityList(): array
+    {
+        return MembershipPlan::lines($this->amenities);
+    }
 
     public function categories()
     {

@@ -13,5 +13,8 @@ class Testimonial extends Model
         'avatar_path',
         'type',
         'sort_order',
+        'tag',
+        'rating',
+        'show_on_home',
     ];
 }

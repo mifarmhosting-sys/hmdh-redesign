@@ -98,6 +98,21 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/comments/{id}/approve', [AdminBlogController::class, 'commentApprove'])->name('admin.blogs.comments.approve');
     Route::delete('/comments/{id}', [AdminBlogController::class, 'commentDestroy'])->name('admin.blogs.comments.destroy');
 
+    // Editable page content (texts, pictures, repeating cards) - see config/cms.php
+    Route::get('/pages', [\App\Http\Controllers\AdminPageController::class, 'index'])->name('admin.pages.index');
+    Route::get('/pages/{page}', [\App\Http\Controllers\AdminPageController::class, 'edit'])->name('admin.pages.edit');
+    Route::post('/pages/{page}', [\App\Http\Controllers\AdminPageController::class, 'update'])->name('admin.pages.update');
+    Route::get('/pages/{page}/lists/{list}/create', [\App\Http\Controllers\AdminPageController::class, 'itemCreate'])->name('admin.pages.items.create');
+    Route::post('/pages/{page}/lists/{list}', [\App\Http\Controllers\AdminPageController::class, 'itemStore'])->name('admin.pages.items.store');
+    Route::get('/pages/{page}/lists/{list}/{id}/edit', [\App\Http\Controllers\AdminPageController::class, 'itemEdit'])->name('admin.pages.items.edit');
+    Route::put('/pages/{page}/lists/{list}/{id}', [\App\Http\Controllers\AdminPageController::class, 'itemUpdate'])->name('admin.pages.items.update');
+    Route::delete('/pages/{page}/lists/{list}/{id}', [\App\Http\Controllers\AdminPageController::class, 'itemDestroy'])->name('admin.pages.items.destroy');
+
+    // Membership content: plans, offers, FAQs
+    Route::resource('membership-plans', \App\Http\Controllers\AdminMembershipPlanController::class, ['names' => 'admin.plans'])->except('show')->parameters(['membership-plans' => 'id']);
+    Route::resource('offers', \App\Http\Controllers\AdminOfferController::class, ['names' => 'admin.offers'])->except('show')->parameters(['offers' => 'id']);
+    Route::resource('faqs', \App\Http\Controllers\AdminFaqController::class, ['names' => 'admin.faqs'])->except('show')->parameters(['faqs' => 'id']);
+
     // Membership Enquiries
     Route::get('/membership-enquiries', [\App\Http\Controllers\AdminMembershipController::class, 'index'])->name('admin.membership_enquiries.index');
     Route::delete('/membership-enquiries/{id}', [\App\Http\Controllers\AdminMembershipController::class, 'destroy'])->name('admin.membership_enquiries.destroy');
@@ -151,7 +166,7 @@ Route::get('/run-migrations', function() {
             'message' => $e->getMessage()
         ], 500);
     }
-});
+})->middleware(\App\Http\Middleware\DeployKey::class);
 
 // Route to drop all tables, migrate, and seed fresh
 Route::get('/fresh-database', function() {
@@ -180,7 +195,7 @@ Route::get('/fresh-database', function() {
             'message' => $e->getMessage()
         ], 500);
     }
-});
+})->middleware(\App\Http\Middleware\DeployKey::class);
 
 
 Route::get('/storage-link', function() {
@@ -204,12 +219,14 @@ Route::get('/storage-link', function() {
     } catch (\Throwable $e) {
         return 'Error: ' . $e->getMessage() . '<br>File: ' . $e->getFile() . '<br>Line: ' . $e->getLine() . '<br>You can safely ignore this error if the images are now loading, as the Laravel route fallback is active.';
     }
-});
+})->middleware(\App\Http\Middleware\DeployKey::class);
 
 // Fallback storage route to serve images if Hostinger blocks symbolic links
 Route::get('/storage/{path}', function($path) {
-    $file = storage_path('app/public/' . $path);
-    if (!file_exists($file)) {
+    $base = realpath(storage_path('app/public'));
+    $file = realpath($base . DIRECTORY_SEPARATOR . $path);
+    // never serve anything outside storage/app/public (blocks ../ path traversal)
+    if ($file === false || !str_starts_with($file, $base . DIRECTORY_SEPARATOR) || !is_file($file)) {
         abort(404);
     }
     
@@ -266,7 +283,7 @@ Route::get('/clear-cache', function() {
     } catch (\Exception $e) {
         return 'Error: ' . $e->getMessage();
     }
-});
+})->middleware(\App\Http\Middleware\DeployKey::class);
 
 Route::get('/list-tables', function() {
     try {
@@ -285,7 +302,7 @@ Route::get('/list-tables', function() {
     } catch (\Exception $e) {
         return 'Error: ' . $e->getMessage();
     }
-});
+})->middleware(\App\Http\Middleware\DeployKey::class);
 
 Route::get('/test-db', function() {
     try {
@@ -309,7 +326,7 @@ Route::get('/test-db', function() {
     } catch (\Exception $e) {
         return 'Error: ' . $e->getMessage();
     }
-});
+})->middleware(\App\Http\Middleware\DeployKey::class);
 
 Route::get('/update-db-live', function () {
     try {
@@ -331,4 +348,4 @@ Route::get('/update-db-live', function () {
             'message' => $e->getMessage()
         ], 500);
     }
-});
+})->middleware(\App\Http\Middleware\DeployKey::class);
